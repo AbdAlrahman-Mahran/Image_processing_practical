@@ -9,7 +9,7 @@ class App1(ctk.CTk):
     def __init__(self):
         super().__init__()
         self._set_appearance_mode('Dark')
-        self.title('Segmentation And Thresholding')
+        self.title('Hough And Thresholding')
         self.geometry('1024x720')
         self.frame = ctk.CTkScrollableFrame(self, fg_color='#171717')
         self.frame.pack(padx=5, pady=5, fill='both', expand=True)
@@ -46,7 +46,7 @@ class App1(ctk.CTk):
             if value == 'Hough-Circle':
                 self.remove_slider()
                 self.apply_hough()
-            elif value == 'Threshold-Segmentation':
+            elif value == 'Thresholding':
                 if not self.flag:
                     self.add_slider()
                 self.apply_thresholding()
@@ -73,56 +73,6 @@ class App1(ctk.CTk):
         _, threshold_img = cv2.threshold(gray_img, threshold_value, 255, cv2.THRESH_BINARY)
         self.update_img(cv2.cvtColor(threshold_img, cv2.COLOR_GRAY2BGR))
 
-    """def apply_region_split_merge_segmentation(self):
-        region_split_merge_image = self.original_img.copy()
-        height, width = region_split_merge_image.shape[:2]
-
-        def region_growing(image, seed):
-            visited = set()
-            stack = [seed]
-
-            while stack:
-                x, y = stack.pop()
-                if (x, y) not in visited:
-                    visited.add((x, y))
-                    for dx in range(-1, 2):
-                        for dy in range(-1, 2):
-                            nx, ny = x + dx, y + dy
-                            if 0 <= nx < width and 0 <= ny < height:
-                                if abs(int(image[y, x]) - int(image[ny, nx])) < 20:
-                                    stack.append((nx, ny))
-
-            return visited
-
-        def merge_regions(visited_regions):
-            new_regions = []
-            for region in visited_regions:
-                merged_region = region.copy()
-                while True:
-                    for other_region in visited_regions:
-                        if other_region != region and not set(region).isdisjoint(other_region):
-                            merged_region.update(other_region)
-                            visited_regions.remove(other_region)
-                            break
-                    else:
-                        break
-                new_regions.append(merged_region)
-            return new_regions
-
-        seeds = [(0, 0), (width - 1, 0), (0, height - 1), (width - 1, height - 1)]
-
-        visited_regions = []
-        for seed in seeds:
-            visited_region = region_growing(region_split_merge_image, seed)
-            visited_regions.append(visited_region)
-
-        merged_regions = merge_regions(visited_regions)
-        for region in merged_regions:
-            for x, y in region:
-                region_split_merge_image[y, x] = 255
-
-        self.update_img(region_split_merge_image)"""
-
     def add_buttons(self):
         # Frame to contain the buttons
         button_frame = ctk.CTkFrame(self.frame, fg_color='#171717')
@@ -143,7 +93,7 @@ class App1(ctk.CTk):
         self.image_label.pack()
 
         # Segmented Button to choose the filter
-        self.segButton = ctk.CTkSegmentedButton(self.frame, values=['Hough-Circle', 'Threshold-Segmentation'], command=self.get_sgmntd_value, font=self.dflt_fnt)
+        self.segButton = ctk.CTkSegmentedButton(self.frame, values=['Hough-Circle', 'Thresholding'], command=self.get_sgmntd_value, font=self.dflt_fnt)
         self.segButton.pack(pady=10, ipadx=100)
 
     #function to add a slider for threshold value
