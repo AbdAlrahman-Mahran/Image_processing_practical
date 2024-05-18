@@ -1,5 +1,5 @@
 # Image_processing_practical
-## [Names](/Names.txt)
+## [Names](./Names.txt)
 <br>
 ![UI](/Images/UI.png) 
 ### <br><br>Use "Browse image" to choose an image (supported types: png, jpg, jpeg, gif).
