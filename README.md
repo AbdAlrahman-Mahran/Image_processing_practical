@@ -6,7 +6,7 @@
 ### <br><br>You can select the modification you want to apply.
 <br>![Filters](</Images/Filters_UI.png>)
 <br>![Edge Detection](</Images/Edge Detection UI.png>)
-<br>![Hough and Segmentation](</Images/Hough and Sgementation UI.png>)
+<br>![Hough and Thresholding](</Images/Hough and Thresholding UI.png>)
 
 
 
