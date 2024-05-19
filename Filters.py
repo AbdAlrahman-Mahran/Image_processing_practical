@@ -6,8 +6,6 @@ import numpy as np
 
 ctk.set_default_color_theme('green')
 
-img_window = ctk.CTk()
-
 
 class App2(ctk.CTk):
     def __init__(self):
@@ -19,7 +17,6 @@ class App2(ctk.CTk):
         self.frame.pack(padx=5, pady=5, fill='both', expand=True)
         self.dflt_fnt = ctk.CTkFont(family='arial', weight='bold')
         self.original_img = None
-        self.secondary_window = ctk.CTk()
         self.kernel_val = DoubleVar()
         self.add_buttons_sliders()
 
@@ -35,8 +32,8 @@ class App2(ctk.CTk):
     def update_img(self, img):
         img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         img = Image.fromarray(img)
-        fin_img = ctk.CTkImage(dark_image=img, size=img.size)
-        self.image_label.configure(image=fin_img, text='')
+        img = ImageTk.PhotoImage(img)
+        self.image_label.configure(image=img, text='')
 
     def reset_img(self):
         if self.original_img is not None:
@@ -122,9 +119,9 @@ class App2(ctk.CTk):
         self.reset_btn.pack(side='left', padx=5)
 
         # null label to show the image
-        image_label = ctk.CTkLabel(self.frame, text='No Image Selected')
-        image_label.pack()
-        self.secondary_window.configure()
+        self.image_label = ctk.CTkLabel(self.frame, text='No Image Selected')
+        self.image_label.pack()
+
         # Segmented Button to choose the filter
         self.segButton = ctk.CTkSegmentedButton(self.frame,
                                                 values=['High-Pass', 'Mean', 'Median', 'Erosion', 'Dilation', 'Open',
@@ -150,4 +147,3 @@ class App2(ctk.CTk):
 
 app1 = App2()
 app1.mainloop()
-app1.secondary_window.configure()
