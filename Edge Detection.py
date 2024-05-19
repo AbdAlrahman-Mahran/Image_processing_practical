@@ -68,7 +68,7 @@ class App1(ctk.CTk):
         kernely = np.array([[1, 1, 1], [0, 0, 0], [-1, -1, -1]])
         img_prewittx = cv2.filter2D(img_gaussian, -1, kernelx)
         img_prewitty = cv2.filter2D(img_gaussian, -1, kernely)
-        prewitt_img = img_prewittx + img_prewitty
+        prewitt_img = abs(img_prewittx) + abs(img_prewitty)
         self.show_processed_img(prewitt_img)
 
     def apply_roberts(self):
